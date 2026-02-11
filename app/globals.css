@@ -107,9 +107,15 @@ a {
 
 .playlist-block {
   margin-top: 24px;
-  padding: 16px;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--accent-1) 16%, #fff);
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.playlist-block iframe {
+  border: 0;
+  border-radius: 0;
+  display: block;
 }
 
 .admin-shell {
