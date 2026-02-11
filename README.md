@@ -50,3 +50,5 @@ A Next.js + PostgreSQL music blog with:
 - Create Postgres database (Neon, Supabase, Railway, etc)
 - Configure env vars on host
 - Run Prisma migrations during deploy
+
+See hosting options in `docs/hosting.md`.
