@@ -1,7 +1,17 @@
 import Link from "next/link";
-import { db } from "@/lib/db";
+import { db, isDatabaseConfigured } from "@/lib/db";
+
+export const dynamic = "force-dynamic";
 
 const POSTS_PER_PAGE = 5;
+type PostListItem = {
+  id: string;
+  title: string;
+  slug: string;
+  contentHtml: string;
+  publishedAt: Date | null;
+  createdAt: Date;
+};
 
 function toPreviewText(html: string, maxLength = 280) {
   const plain = html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
@@ -21,23 +31,25 @@ export default async function HomePage({
   const page = Number.parseInt(params.page ?? "1", 10);
   const currentPage = Number.isNaN(page) || page < 1 ? 1 : page;
 
-  const [posts, totalCount] = await Promise.all([
-    db.post.findMany({
-      where: { isPublished: true },
-      orderBy: { publishedAt: "desc" },
-      skip: (currentPage - 1) * POSTS_PER_PAGE,
-      take: POSTS_PER_PAGE,
-      select: {
-        id: true,
-        title: true,
-        slug: true,
-        contentHtml: true,
-        publishedAt: true,
-        createdAt: true
-      }
-    }),
-    db.post.count({ where: { isPublished: true } })
-  ]);
+  const [posts, totalCount]: [PostListItem[], number] = isDatabaseConfigured
+    ? await Promise.all([
+        db.post.findMany({
+          where: { isPublished: true },
+          orderBy: { publishedAt: "desc" },
+          skip: (currentPage - 1) * POSTS_PER_PAGE,
+          take: POSTS_PER_PAGE,
+          select: {
+            id: true,
+            title: true,
+            slug: true,
+            contentHtml: true,
+            publishedAt: true,
+            createdAt: true
+          }
+        }),
+        db.post.count({ where: { isPublished: true } })
+      ])
+    : [[], 0];
 
   const totalPages = Math.max(1, Math.ceil(totalCount / POSTS_PER_PAGE));
 

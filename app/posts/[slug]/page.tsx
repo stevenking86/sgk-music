@@ -1,10 +1,15 @@
 import { notFound } from "next/navigation";
 import sanitizeHtml from "sanitize-html";
-import { db } from "@/lib/db";
+import { db, isDatabaseConfigured } from "@/lib/db";
 import { toSpotifyEmbedUrl } from "@/lib/spotify";
+
+export const dynamic = "force-dynamic";
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  if (!isDatabaseConfigured) {
+    notFound();
+  }
 
   const post = await db.post.findUnique({
     where: { slug },

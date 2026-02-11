@@ -1,19 +1,21 @@
 import Link from "next/link";
-import { db } from "@/lib/db";
+import { db, isDatabaseConfigured } from "@/lib/db";
 
 export default async function AdminPostsPage() {
-  const posts = await db.post.findMany({
-    orderBy: [{ createdAt: "desc" }],
-    select: {
-      id: true,
-      title: true,
-      slug: true,
-      isPublished: true,
-      publishedAt: true,
-      createdAt: true,
-      updatedAt: true
-    }
-  });
+  const posts = isDatabaseConfigured
+    ? await db.post.findMany({
+        orderBy: [{ createdAt: "desc" }],
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          isPublished: true,
+          publishedAt: true,
+          createdAt: true,
+          updatedAt: true
+        }
+      })
+    : [];
 
   return (
     <section className="admin-content">
