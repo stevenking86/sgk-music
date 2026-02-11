@@ -52,3 +52,4 @@ A Next.js + PostgreSQL music blog with:
 - Run Prisma migrations during deploy
 
 See hosting options in `docs/hosting.md`.
+See the project color palette in `docs/style-guide.md`.
