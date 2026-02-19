@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="site-shell">
           <header className="site-header">
             <Link href="/" className="brand">
-              Music Blog
+              Songs This Week
             </Link>
           </header>
           <main>{children}</main>

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap");
+
 :root {
   --bg: #ffffff;
   --text: #131313;
@@ -44,6 +46,7 @@ a {
   font-size: clamp(1.6rem, 2.3vw, 2.2rem);
   font-weight: 700;
   letter-spacing: 0.02em;
+  font-family: "Bitcount Grid Double", "Georgia", "Times New Roman", serif;
 }
 
 .post-feed {
@@ -116,7 +119,7 @@ a {
 }
 
 .playlist-block h2 {
-  color: var(--accent-4);
+  color: var(--accent-2);
   font-size: 1.2rem;
   letter-spacing: 0.03em;
 }
