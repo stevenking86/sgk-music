@@ -24,7 +24,6 @@ export default defineConfig({
     ? undefined
     : {
         command: "npm run dev",
-        env: process.env,
         url: "http://127.0.0.1:3000",
         timeout: 120_000,
         reuseExistingServer: !process.env.CI

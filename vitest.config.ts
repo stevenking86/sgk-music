@@ -14,12 +14,6 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     include: ["tests/unit/**/*.test.ts", "tests/unit/**/*.test.tsx"],
-    environmentMatchGlobs: [
-      ["tests/unit/lib/auth.test.ts", "node"],
-      ["tests/unit/lib/slug.test.ts", "node"],
-      ["tests/unit/lib/spotify.test.ts", "node"],
-      ["tests/unit/lib/post-preview.test.ts", "node"]
-    ],
     globals: true,
     setupFiles: ["./tests/setup.ts"],
     coverage: {
